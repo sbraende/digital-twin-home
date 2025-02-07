@@ -1,0 +1,45 @@
+.lights-list {
+  width: 100%;
+}
+
+.light {
+  width: 100%;
+  padding: var(--spacing-small) var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius-medium);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+}
+
+.light__top-row-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.light__icon-and-name {
+  width: 100%;
+  display: flex;
+}
+
+.light__switch-label {
+  display: none;
+}
+
+.light__switch {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.light__slider-container {
+  width: 100%;
+}
+
+.light__slider-input {
+  width: 100%;
+}
