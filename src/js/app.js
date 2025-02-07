@@ -1,1 +1,3 @@
-console.log("hi Seb");
+import { getLight } from "./hueController";
+
+getLight();
