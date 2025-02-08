@@ -9,7 +9,13 @@ const getLight = async () => {
   try {
     const response = await fetch("http://localhost:3000/light");
     const data = await response.json();
-    console.log(data);
+
+    console.log(data[5].state.on);
+    if (data[5].state.on) {
+      console.log("light is on");
+    } else {
+      console.log("light is off");
+    }
   } catch (error) {
     console.error(`Could not fetch data: ${error}`);
   }
