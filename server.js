@@ -8,47 +8,41 @@ const HUE_BRIDGE_IP = process.env.HUE_BRIDGE_IP;
 const HUE_API_KEY = process.env.HUE_API_KEY;
 
 app.use(cors()); // Setup server response with CORS Header (all IPs allowed)
+app.use(express.json());
 
-app.get("/", (request, response) => {
-  response.send("Hello my man!");
+app.get("/", async (req, res) => {
+  res.send("Hello my man!");
 });
 
-app.get("/light", async (request, response) => {
+app.get("/lights", async (req, res) => {
   try {
-    const res = await fetch(
-      `http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights`
-    );
-    const data = await res.json();
-    response.send(data);
+    const hueResponse = await fetch(`http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights`);
+    const data = await hueResponse.json();
+    res.send(data);
   } catch (error) {
-    response.status(500).send("Error fetching light data: " + error.message);
+    res.status(500).send("Error fetching light data: " + error.message);
   }
 });
 
-app.get("/off", async (request, response) => {
-  const res = await fetch(
-    `http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights/5/state`,
-    {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ on: false }),
-    }
-  );
-  const data = await res.json();
-  response.send(data);
-});
+app.put("/setLight", async (req, res) => {
+  const { lightId, isOn } = req.body;
+  console.log(lightId, isOn);
 
-app.get("/on", async (request, response) => {
-  const res = await fetch(
-    `http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights/5/state`,
-    {
+  try {
+    const hueResponse = await fetch(`http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights/${lightId}/state`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ on: true }),
+      body: JSON.stringify({ on: isOn }),
+    });
+    if (!hueResponse.ok) {
+      throw new Error(`Hue API error: ${hueResponse.statusText}`);
     }
-  );
-  const data = await res.json();
-  response.send(data);
+
+    const hueData = await hueResponse.json();
+    res.json(hueData);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to communicate with Hue Bridge" });
+  }
 });
 
 app.listen(port, () => {

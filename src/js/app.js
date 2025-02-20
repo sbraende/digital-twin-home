@@ -1,3 +1,3 @@
-import { getLight } from "./hueController";
+// import { getLight } from "./hueController";
 
-getLight();
+// getLight();
