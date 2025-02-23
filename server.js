@@ -26,8 +26,6 @@ app.get("/lights", async (req, res) => {
 
 app.put("/setLight", async (req, res) => {
   const { lightId, isOn } = req.body;
-  console.log(lightId, isOn);
-
   try {
     const hueResponse = await fetch(`http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights/${lightId}/state`, {
       method: "PUT",
@@ -37,7 +35,6 @@ app.put("/setLight", async (req, res) => {
     if (!hueResponse.ok) {
       throw new Error(`Hue API error: ${hueResponse.statusText}`);
     }
-
     const hueData = await hueResponse.json();
     res.json(hueData);
   } catch (error) {

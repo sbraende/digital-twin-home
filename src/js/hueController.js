@@ -12,7 +12,6 @@ const getLights = async () => {
 
 const renderLights = (lightsList) => {
   const lightsListElement = document.querySelector(".lights-list"); // Assuming there's a container for lights
-  console.log(lightsList);
 
   Object.entries(lightsList).forEach((light) => {
     const lightDetails = light[1];
@@ -69,12 +68,15 @@ const renderLights = (lightsList) => {
     // Eventlistener
     lightSwitch.addEventListener("change", (e) => {
       if (e.target.checked) {
-        console.log("Light is on");
         toggleLight(light[0], true);
       } else {
-        console.log("light is off");
         toggleLight(light[0], false);
       }
+    });
+
+    sliderInput.addEventListener("change", (e) => {
+      console.log(e.target.value);
+      // TODO: Setup endpoint for bri (brightness)
     });
   });
 };
