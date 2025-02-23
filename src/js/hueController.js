@@ -1,19 +1,41 @@
-const serverURL = "http://localhost:3000/";
+const SERVERURL = "http://localhost:3000/";
 
+// INIT
+document.addEventListener("DOMContentLoaded", () => {
+  renderLights(getLights());
+});
+
+// CORE FUNCTIONS
 const getLights = async () => {
   try {
-    const res = await fetch(serverURL + "lights");
-    const data = await res.json();
+    const req = await fetch(SERVERURL + "lights");
+    const data = await req.json();
     renderLights(data);
   } catch (error) {
     console.error(`Could not get lights: ${error}`);
   }
 };
 
+const setLightState = async (lightId, lightState) => {
+  try {
+    const req = await fetch(SERVERURL + "lightState", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lightId, lightState }),
+    });
+    const res = await req.json();
+    console.log(res);
+  } catch (error) {
+    console.error(`Could not reach server with PUT: ${error}`);
+  }
+};
+
 const renderLights = (lightsList) => {
   const lightsListElement = document.querySelector(".lights-list"); // Assuming there's a container for lights
+  lightsListElement.textContent = "";
 
   Object.entries(lightsList).forEach((light) => {
+    const lightId = light[0];
     const lightDetails = light[1];
 
     // Create elements
@@ -47,7 +69,7 @@ const renderLights = (lightsList) => {
     switchLabel.textContent = "Light switch checkbox";
     lightSwitch.type = "checkbox";
     lightSwitch.name = "light__switch";
-    lightSwitch.id = "light__switch";
+    // lightSwitch.id = "light__switch";
     lightSwitch.checked = lightDetails.state.on;
 
     sliderInput.type = "range";
@@ -65,36 +87,19 @@ const renderLights = (lightsList) => {
     // Append everything to the light list container
     lightsListElement.append(lightItem);
 
+    console.log(lightDetails);
+
     // Eventlistener
     lightSwitch.addEventListener("change", (e) => {
       if (e.target.checked) {
-        toggleLight(light[0], true);
+        setLightState(lightId, { on: true });
       } else {
-        toggleLight(light[0], false);
+        setLightState(lightId, { on: false });
       }
     });
 
     sliderInput.addEventListener("change", (e) => {
-      console.log(e.target.value);
-      // TODO: Setup endpoint for bri (brightness)
+      setLightState(lightId, { bri: parseInt(e.target.value) });
     });
   });
 };
-
-const toggleLight = async (lightId, isOn) => {
-  try {
-    const req = await fetch(serverURL + "setLight", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lightId, isOn }),
-    });
-    const res = await req.json();
-    console.log(res);
-  } catch (error) {
-    console.error(`Could not reach server with PUT: ${error}`);
-  }
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderLights(getLights());
-});

@@ -24,13 +24,13 @@ app.get("/lights", async (req, res) => {
   }
 });
 
-app.put("/setLight", async (req, res) => {
-  const { lightId, isOn } = req.body;
+app.put("/lightState", async (req, res) => {
+  const { lightId, lightState } = req.body;
   try {
     const hueResponse = await fetch(`http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights/${lightId}/state`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ on: isOn }),
+      body: JSON.stringify(lightState),
     });
     if (!hueResponse.ok) {
       throw new Error(`Hue API error: ${hueResponse.statusText}`);
