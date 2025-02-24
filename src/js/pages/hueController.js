@@ -1,3 +1,5 @@
+import { remapValue } from "../core/mathsFormula";
+
 const SERVERURL = "http://localhost:3000/";
 
 // INIT
@@ -24,7 +26,6 @@ const setLightState = async (lightId, lightState) => {
       body: JSON.stringify({ lightId, lightState }),
     });
     const res = await req.json();
-    console.log(res);
   } catch (error) {
     console.error(`Could not reach server with PUT: ${error}`);
   }
@@ -39,7 +40,7 @@ const renderLights = (lightsList) => {
     const lightDetails = light[1];
 
     // Create elements
-    const lightItem = document.createElement("li");
+    const lightElement = document.createElement("li");
     const topRowContainer = document.createElement("div");
     const iconAndName = document.createElement("div");
     const lightIcon = document.createElement("img");
@@ -50,7 +51,7 @@ const renderLights = (lightsList) => {
     const sliderInput = document.createElement("input");
 
     // Assign classes
-    lightItem.className = "light";
+    lightElement.className = "light";
     topRowContainer.className = "light__top-row-container";
     iconAndName.className = "light__icon-and-name";
     lightIcon.className = "light__icon";
@@ -61,6 +62,20 @@ const renderLights = (lightsList) => {
     sliderInput.className = "light__slider-input";
 
     // Set attributes and content
+
+    // Light remap
+    console.log(lightDetails);
+    if (lightDetails.type === "Color temperature light") {
+      const kelvin = 1_000_000 / lightDetails.state.ct;
+      console.log(kelvin);
+    } else if (lightDetails.type === "Extended color light") {
+      const hue = remapValue(lightDetails.state.hue, 0, 65535, 0, 360);
+      const sat = remapValue(lightDetails.state.sat, 0, 254, 0, 100);
+      const lightness = remapValue(lightDetails.state.bri, 0, 254, 50, 60);
+      lightElement.style.background = `hsl(${hue}, ${sat}%, ${lightness}%)`;
+    }
+
+    // TODO: Contine here
     lightIcon.src = "";
     lightIcon.alt = "";
     lightName.textContent = lightDetails.name;
@@ -82,12 +97,10 @@ const renderLights = (lightsList) => {
     iconAndName.append(lightIcon, lightName);
     topRowContainer.append(iconAndName, switchLabel, lightSwitch);
     sliderContainer.append(sliderInput);
-    lightItem.append(topRowContainer, sliderContainer);
+    lightElement.append(topRowContainer, sliderContainer);
 
     // Append everything to the light list container
-    lightsListElement.append(lightItem);
-
-    console.log(lightDetails);
+    lightsListElement.append(lightElement);
 
     // Eventlistener
     lightSwitch.addEventListener("change", (e) => {

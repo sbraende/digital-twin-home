@@ -1,3 +1,31 @@
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: var(--spacing-medium);
+}
+
+main {
+  width: 100%;
+  padding: var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  width: 100%;
+}
+
+.section__title {
+  padding-bottom: var(--spacing-small);
+}
+
+/* hueLights */
 .lights-list {
   width: 100%;
   display: flex;
