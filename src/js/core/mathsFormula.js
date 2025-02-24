@@ -5,7 +5,9 @@ function remapValue(value, innStart, innStop, outStart, outStop) {
   outStart = Number(outStart);
   outStop = Number(outStop);
 
-  return Number(outStart + (outStop - outStart) * ((value - innStart) / (innStop - innStart)).toFixed(4));
+  return Number(
+    outStart + (outStop - outStart) * ((value - innStart) / (innStop - innStart)).toFixed(4)
+  );
 }
 
 export { remapValue };
