@@ -15,7 +15,6 @@ const getLights = async () => {
 const ctToRGB = (ct) => {
   // Formula from ChatGPT
   let kelvin = 1000000 / ct;
-
   let temp = kelvin / 100;
   let red, green, blue;
 

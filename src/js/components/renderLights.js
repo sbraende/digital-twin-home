@@ -1,4 +1,4 @@
-import { getLights, getColorFromLight } from "../core/lightsLogic";
+import { getLights, getColorFromLight, setLightState } from "../core/lightsLogic";
 
 const renderLights = async () => {
   const lightsListElement = document.querySelector(".lights-list");
@@ -42,7 +42,6 @@ const renderLights = async () => {
     switchLabel.textContent = "Light switch checkbox";
     lightSwitch.type = "checkbox";
     lightSwitch.name = "light__switch";
-    // lightSwitch.id = "light__switch";
     lightSwitch.checked = lightDetails.state.on;
 
     sliderInput.type = "range";
