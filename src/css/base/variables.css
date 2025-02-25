@@ -1,9 +1,16 @@
 :root {
   /* COLORS */
-  --color-background: black;
-  --color-primary: white;
+  --color-primary-white: white;
   --color-primary-gray: lightgray;
   --color-dark-gray: gray;
+
+  --color-primary-blue: #85a4ed;
+  --color-text-medium: #686868;
+  --color-text-light: #e8e8e8;
+  --color-text-dark: #333333;
+  --color-background: #1a1a1b;
+  --color-container-background: #252528;
+  --color-accorrdion-background: #343437;
 
   /* SPACING */
   --spacing-x-small: 0.25rem;

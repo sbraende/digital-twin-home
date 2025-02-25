@@ -2,5 +2,9 @@
 @import url(./base/variables.css);
 @import url(./base/utilities.css);
 @import url(./base/fonts.css);
+@import url(./base/layout.css);
 
-@import url(./pages/lightsController.css);
+@import url(./tab/tab.css);
+@import url(./tab/lightsController.css);
+
+@import url(./canvas3d/canvas3D.css);

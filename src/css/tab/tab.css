@@ -1,0 +1,6 @@
+.tab {
+  width: 400px;
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius-medium);
+  background-color: var(--color-container-background);
+}

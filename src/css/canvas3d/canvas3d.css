@@ -1,0 +1,5 @@
+.canvas3D-container {
+  flex-grow: 1;
+  background-color: var(--color-container-background);
+  border-radius: var(--border-radius-medium);
+}

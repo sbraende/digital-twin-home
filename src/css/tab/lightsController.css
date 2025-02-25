@@ -1,31 +1,3 @@
-body {
-  width: 100%;
-  height: 100vh;
-  background-color: var(--color-primary);
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  padding: var(--spacing-medium);
-}
-
-main {
-  width: 100%;
-  padding: var(--spacing-medium);
-  display: flex;
-  flex-direction: column;
-}
-
-.section {
-  width: 100%;
-}
-
-.section__title {
-  padding-bottom: var(--spacing-small);
-}
-
-/* hueLights */
 .lights-list {
   width: 100%;
   display: flex;
@@ -38,14 +10,21 @@ main {
   padding: var(--spacing-small) var(--spacing-medium);
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-small);
   border-radius: var(--border-radius-medium);
-  background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
 }
 
 .light__top-row-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .light__icon-and-name {

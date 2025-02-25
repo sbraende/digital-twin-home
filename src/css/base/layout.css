@@ -1,0 +1,35 @@
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  font-family: "inter", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-light);
+}
+
+.header {
+  padding: var(--spacing-medium);
+}
+
+main {
+  width: 100%;
+  padding: var(--spacing-medium);
+  display: flex;
+  gap: var(--spacing-medium);
+}
+
+.section {
+  width: 100%;
+}
+
+.section__title {
+  padding-bottom: var(--spacing-small);
+}
+
+@media screen AND (max-width: 480px) {
+  main {
+    flex-direction: column;
+  }
+}
