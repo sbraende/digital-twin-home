@@ -3,11 +3,11 @@ import * as THREE from "three";
 const renderCanvas3D = () => {
   const canvas3d = document.querySelector(".canvas3D");
   const canvas3dContainer = document.querySelector(".canvas3D-container");
-  console.log(canvas3dContainer, canvas3dContainer.width);
-  console.log(canvas3d.width);
+  // console.log(canvas3dContainer, canvas3dContainer.width);
+  // console.log(canvas3d.width);
 
-  // const canvasSize = { width: 500, height: 500 };
-  const canvasSize = { width: canvas3dContainer.width, height: canvas3dContainer.height };
+  const canvasSize = { width: 500, height: 500 };
+  // const canvasSize = { width: canvas3dContainer.width, height: canvas3dContainer.height };
 
   // const canvasSize = { width: document.width, height: 500 };
 
@@ -34,12 +34,18 @@ const renderCanvas3D = () => {
   const render = new THREE.WebGLRenderer({ canvas: canvas3d });
   render.setSize(canvasSize.width, canvasSize.height);
 
-  // Tick
+  const clock = new THREE.Clock();
+  let previousTime = 0;
+
   const tick = () => {
-    torusMesh.rotation.y += 0.01;
+    const elapsedTime = clock.getElapsedTime();
+    const deltaTime = elapsedTime - previousTime;
+    previousTime = elapsedTime;
     render.render(scene, camera);
     window.requestAnimationFrame(tick);
+    // Multiply delta with animation for currect animation speed
   };
+
   tick();
 };
 
