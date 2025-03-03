@@ -39,7 +39,6 @@ const ctToRGB = (ct) => {
 };
 
 const hueHSBToHSL = (lightDetails) => {
-  console.log(lightDetails);
   return {
     hue: remapValue(lightDetails.state.hue, 0, 65535, 0, 360),
     sat: remapValue(lightDetails.state.sat, 0, 254, 0, 100),
