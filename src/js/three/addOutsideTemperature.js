@@ -2,25 +2,29 @@ import * as THREE from "three";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import getWeather from "../core/weatherLogic";
-import { log } from "three/tsl";
 
 const fontLoader = new FontLoader();
 
 const addOutsideTemperature = async (scene) => {
-  const weatherData = await getWeather();
-  if (!weatherData) {
-    console.error("Could not render weather data.");
-    return;
+  try {
+    const weatherData = await getWeather();
+    const temperature = Math.floor(weatherData.main.temp);
+    renderOutsideWeatherPuck(scene, temperature);
+  } catch (error) {
+    const temperature = 7;
+    console.log("Using standin temperature of 7");
+    renderOutsideWeatherPuck(scene, temperature);
   }
-  console.log(weatherData);
+};
 
+const renderOutsideWeatherPuck = (scene, temperature) => {
   const weatherCylinder = new THREE.Mesh(
     new THREE.CylinderGeometry(1, 1, 0.2),
     new THREE.MeshStandardMaterial()
   );
 
   fontLoader.load("/assets/fonts/Inter/json/Inter_18pt_Regular.json", (font) => {
-    const textGeometry = new TextGeometry(`${Math.floor(weatherData.main.temp)}°`, {
+    const textGeometry = new TextGeometry(`${temperature}°`, {
       font,
       size: 0.5,
       depth: 0.2,
