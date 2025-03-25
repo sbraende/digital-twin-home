@@ -6,6 +6,7 @@ import GUI from "lil-gui";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import addLights from "../three/addLights";
 import { log } from "three/tsl";
+import addOutsideTemperature from "../three/addOutsideTemperature";
 
 const renderCanvas3D = () => {
   const canvas3d = document.querySelector(".canvas3D");
@@ -32,6 +33,7 @@ const renderCanvas3D = () => {
 
   // Objects
   // Render 3D objects
+  addOutsideTemperature(scene);
 
   // Light
   addLights(scene, false);

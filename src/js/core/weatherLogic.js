@@ -4,6 +4,7 @@ const getWeather = async () => {
   try {
     const request = await fetch(`${LOCALSERVERURL}weather`);
     const weatherData = await request.json();
+    return weatherData;
     console.log(weatherData);
   } catch (error) {
     console.error("Could not get weather from local server", error);
