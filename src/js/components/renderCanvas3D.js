@@ -31,6 +31,7 @@ const renderCanvas3D = () => {
   });
 
   // Objects
+  // Render 3D objects
 
   // Light
   addLights(scene, false);

@@ -1,11 +1,11 @@
 import { remapValue } from "./mathsFormula";
 import testDataLights from "./testDataLights";
-const SERVERURL = "http://localhost:3000/";
+import LOCALSERVERURL from "./localServerInfo";
 
 // CORE FUNCTIONS
 const getLights = async () => {
   try {
-    const req = await fetch(SERVERURL + "lights");
+    const req = await fetch(LOCALSERVERURL + "lights");
     const lightsData = await req.json();
     return lightsData;
   } catch (error) {
@@ -60,7 +60,7 @@ const getColorFromLight = (lightDetails) => {
 
 const setLightState = async (lightId, lightState) => {
   try {
-    const req = await fetch(SERVERURL + "lightState", {
+    const req = await fetch(LOCALSERVERURL + "lightState", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ lightId, lightState }),
