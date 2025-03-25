@@ -10,6 +10,7 @@
   display: block;
   background-color: green;
   width: 100%;
+  min-height: 500px;
   height: 100%;
   border-radius: var(--border-radius-medium);
 }

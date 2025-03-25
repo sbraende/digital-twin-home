@@ -1,4 +1,5 @@
 import { remapValue } from "./mathsFormula";
+import testDataLights from "./testDataLights";
 const SERVERURL = "http://localhost:3000/";
 
 // CORE FUNCTIONS
@@ -8,7 +9,8 @@ const getLights = async () => {
     const lightsData = await req.json();
     return lightsData;
   } catch (error) {
-    console.error(`Could not get lights: ${error}`);
+    console.error(`Could not get lights, is Node server running? ${error}`);
+    return testDataLights;
   }
 };
 
