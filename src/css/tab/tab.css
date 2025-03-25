@@ -4,3 +4,9 @@
   border-radius: var(--border-radius-medium);
   background-color: var(--color-container-background);
 }
+
+@media screen AND (max-width: 480px) {
+  .tab {
+    width: 100%;
+  }
+}

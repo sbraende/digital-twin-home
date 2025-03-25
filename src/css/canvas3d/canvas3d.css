@@ -8,9 +8,9 @@
 
 .canvas3D {
   display: block;
-  background-color: green;
   width: 100%;
   min-height: 500px;
+  max-height: 1000px;
   height: 100%;
   border-radius: var(--border-radius-medium);
 }
