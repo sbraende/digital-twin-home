@@ -10,6 +10,7 @@ const getLights = async () => {
     return lightsData;
   } catch (error) {
     console.error(`Could not get lights, is Node server running? ${error}`);
+    console.log("Using testDataLights as standin");
     return testDataLights;
   }
 };

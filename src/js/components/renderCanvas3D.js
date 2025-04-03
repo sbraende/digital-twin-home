@@ -45,7 +45,7 @@ const renderCanvas3D = () => {
 
   // Load gltf
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load("/assets/models/flat/flat_v03.glb", (gltf) => {
+  gltfLoader.load("/assets/models/flat/flat_v04.glb", (gltf) => {
     // Traverse through all the childrenof the loaded model
     gltf.scene.traverse((node) => {
       // Check if the node is a mesh
