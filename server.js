@@ -15,6 +15,14 @@ const location = {
 app.use(cors()); // Setup server response with CORS Header (all IPs allowed)
 app.use(express.json());
 
+app.get("/", async (req, res) => {
+    try {
+	await res.send("Root of server, used for testing"); 
+    } catch (error) {
+	res.status(500).send("Could not find server" + error.message);
+    }
+});
+
 app.get("/lights", async (req, res) => {
   try {
     const hueResponse = await fetch(`http://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}/lights`);
@@ -58,11 +66,6 @@ app.get("/weather", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Twin listening to requests from port: ${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Twin listening to requests from port: http://0.0.0.0:${port}`);
 });
-
-// TEST AREA
-// app.get("/", async (req, res) => {
-//   res.send("Hello my man!");
-// });
